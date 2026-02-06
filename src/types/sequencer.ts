@@ -4,6 +4,7 @@ export interface Track {
   id: string;
   label: string;
   sound: string;
+  asset: ReturnType<typeof require>;
   steps: number;
   pulses: number;
   pattern: Pattern;
