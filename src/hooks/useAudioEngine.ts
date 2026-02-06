@@ -39,11 +39,14 @@ export function useAudioEngine() {
       const state = useSequencerStore.getState();
       const { currentStep, tracks: currentTracks } = state;
 
-      currentTracks.forEach((track) => {
+      currentTracks.forEach(async (track) => {
         const stepIndex = currentStep % track.steps;
         if (track.pattern[stepIndex] === 1) {
           const sound = soundsRef.current.get(track.id);
-          sound?.replayAsync();
+          if (sound) {
+            await sound.setVolumeAsync(track.volume);
+            sound.replayAsync();
+          }
         }
       });
 

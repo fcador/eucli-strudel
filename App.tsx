@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import SolarSystem from "./src/components/SolarSystem";
+import VolumeSliders from "./src/components/VolumeSliders";
 import PlayControls from "./src/components/PlayControls";
 import { useAudioEngine } from "./src/hooks/useAudioEngine";
 
@@ -14,6 +15,7 @@ export default function App() {
       <StatusBar style="light" />
       <View className="flex-1 items-center justify-center">
         <SolarSystem />
+        <VolumeSliders />
         <PlayControls />
       </View>
     </SafeAreaView>

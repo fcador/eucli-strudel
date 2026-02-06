@@ -8,6 +8,7 @@ export interface Track {
   steps: number;
   pulses: number;
   pattern: Pattern;
+  volume: number;
 }
 
 export interface SequencerState {
@@ -21,6 +22,7 @@ export interface SequencerActions {
   togglePlay: () => void;
   setPulses: (trackId: string, pulses: number) => void;
   setSteps: (trackId: string, steps: number) => void;
+  setVolume: (trackId: string, volume: number) => void;
   setBpm: (bpm: number) => void;
   tick: () => void;
   getStrudelCode: () => string;
