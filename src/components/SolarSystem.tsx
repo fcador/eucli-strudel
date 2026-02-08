@@ -13,12 +13,13 @@ export default function SolarSystem() {
   const currentStep = useSequencerStore((s) => s.currentStep);
   const isPlaying = useSequencerStore((s) => s.isPlaying);
   const setPulses = useSequencerStore((s) => s.setPulses);
+  const setRotation = useSequencerStore((s) => s.setRotation);
 
   const size = Math.min(width, height) * 0.85;
   const center = size / 2;
   const radii = RADII_RATIOS.map((r) => size * r);
 
-  const panRef = useRef({ trackId: "", lastSteps: 0 });
+  const panRef = useRef({ trackId: "", lastStepsY: 0, lastStepsX: 0 });
 
   const panResponder = useRef(
     PanResponder.create({
@@ -41,26 +42,38 @@ export default function SolarSystem() {
           }
         });
 
-        panRef.current = { trackId: closestTrackId, lastSteps: 0 };
+        panRef.current = { trackId: closestTrackId, lastStepsY: 0, lastStepsX: 0 };
       },
       onPanResponderMove: (_, gestureState) => {
         if (!panRef.current.trackId) return;
         const threshold = 30;
-        const steps = Math.round(gestureState.dy / threshold);
 
-        if (steps !== panRef.current.lastSteps) {
-          const delta = panRef.current.lastSteps - steps;
+        const stepsY = Math.round(gestureState.dy / threshold);
+        if (stepsY !== panRef.current.lastStepsY) {
+          const delta = panRef.current.lastStepsY - stepsY;
           const track = useSequencerStore
             .getState()
             .tracks.find((t) => t.id === panRef.current.trackId);
           if (track) {
             setPulses(track.id, track.pulses + delta);
           }
-          panRef.current.lastSteps = steps;
+          panRef.current.lastStepsY = stepsY;
+        }
+
+        const stepsX = Math.round(gestureState.dx / threshold);
+        if (stepsX !== panRef.current.lastStepsX) {
+          const delta = stepsX - panRef.current.lastStepsX;
+          const track = useSequencerStore
+            .getState()
+            .tracks.find((t) => t.id === panRef.current.trackId);
+          if (track) {
+            setRotation(track.id, track.rotation + delta);
+          }
+          panRef.current.lastStepsX = stepsX;
         }
       },
       onPanResponderRelease: () => {
-        panRef.current = { trackId: "", lastSteps: 0 };
+        panRef.current = { trackId: "", lastStepsY: 0, lastStepsX: 0 };
       },
     })
   ).current;
@@ -82,6 +95,7 @@ export default function SolarSystem() {
                   radius={radii[index]}
                   pattern={track.pattern}
                   steps={track.steps}
+                  rotation={track.rotation}
                   currentStep={currentStep}
                   isPlaying={isPlaying}
                   color={colors.active}
@@ -98,7 +112,7 @@ export default function SolarSystem() {
                   fontFamily="monospace"
                   opacity={0.7}
                 >
-                  {track.label} {track.pulses}/{track.steps}
+                  {track.label} {track.pulses}/{track.steps}{track.rotation > 0 ? `+${track.rotation}` : ""}
                 </SvgText>
               </React.Fragment>
             );

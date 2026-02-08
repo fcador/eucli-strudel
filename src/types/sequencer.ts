@@ -9,6 +9,7 @@ export interface Track {
   asset: ReturnType<typeof require>;
   steps: number;
   pulses: number;
+  rotation: number;
   pattern: Pattern;
   volume: number;
 }
@@ -25,6 +26,7 @@ export interface SequencerActions {
   togglePlay: () => void;
   setPulses: (trackId: string, pulses: number) => void;
   setSteps: (trackId: string, steps: number) => void;
+  setRotation: (trackId: string, rotation: number) => void;
   setVolume: (trackId: string, volume: number) => void;
   setBpm: (bpm: number) => void;
   toggleStrudelFormat: () => void;

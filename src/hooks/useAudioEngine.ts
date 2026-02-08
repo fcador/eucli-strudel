@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Audio } from "expo-av";
 import { useSequencerStore } from "../store/useSequencerStore";
+import { rotatePattern } from "../utils/euclidean";
 
 export function useAudioEngine() {
   const soundsRef = useRef<Map<string, Audio.Sound>>(new Map());
@@ -57,8 +58,9 @@ export function useAudioEngine() {
       const { currentStep, tracks: currentTracks } = state;
 
       currentTracks.forEach((track) => {
+        const rotated = rotatePattern(track.pattern, track.rotation);
         const stepIndex = currentStep % track.steps;
-        if (track.pattern[stepIndex] === 1) {
+        if (rotated[stepIndex] === 1) {
           const sound = soundsRef.current.get(track.id);
           if (sound) {
             sound.replayAsync();
