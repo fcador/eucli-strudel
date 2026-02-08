@@ -5,6 +5,7 @@ import { useSequencerStore } from "../store/useSequencerStore";
 export function useAudioEngine() {
   const soundsRef = useRef<Map<string, Audio.Sound>>(new Map());
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const volumesRef = useRef<Map<string, number>>(new Map());
 
   const isPlaying = useSequencerStore((s) => s.isPlaying);
   const bpm = useSequencerStore((s) => s.bpm);
@@ -15,6 +16,8 @@ export function useAudioEngine() {
     const loadSounds = async () => {
       for (const track of tracks) {
         const { sound } = await Audio.Sound.createAsync(track.asset);
+        await sound.setVolumeAsync(track.volume);
+        volumesRef.current.set(track.id, track.volume);
         soundsRef.current.set(track.id, sound);
       }
     };
@@ -23,8 +26,22 @@ export function useAudioEngine() {
     return () => {
       soundsRef.current.forEach((sound) => sound.unloadAsync());
       soundsRef.current.clear();
+      volumesRef.current.clear();
     };
   }, []);
+
+  useEffect(() => {
+    for (const track of tracks) {
+      const appliedVolume = volumesRef.current.get(track.id);
+      if (appliedVolume === undefined || appliedVolume !== track.volume) {
+        const sound = soundsRef.current.get(track.id);
+        if (sound) {
+          sound.setVolumeAsync(track.volume);
+          volumesRef.current.set(track.id, track.volume);
+        }
+      }
+    }
+  }, [tracks]);
 
   useEffect(() => {
     if (!isPlaying) {
@@ -43,7 +60,9 @@ export function useAudioEngine() {
         const stepIndex = currentStep % track.steps;
         if (track.pattern[stepIndex] === 1) {
           const sound = soundsRef.current.get(track.id);
-          sound?.replayAsync();
+          if (sound) {
+            sound.replayAsync();
+          }
         }
       });
 

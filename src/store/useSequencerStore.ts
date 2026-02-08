@@ -12,6 +12,7 @@ const DEFAULT_TRACKS: Track[] = [
     steps: 16,
     pulses: 4,
     pattern: generateEuclideanPattern(16, 4),
+    volume: 0.7,
   },
   {
     id: "snare",
@@ -21,6 +22,7 @@ const DEFAULT_TRACKS: Track[] = [
     steps: 16,
     pulses: 2,
     pattern: generateEuclideanPattern(16, 2),
+    volume: 0.7,
   },
   {
     id: "hihat",
@@ -30,6 +32,7 @@ const DEFAULT_TRACKS: Track[] = [
     steps: 16,
     pulses: 8,
     pattern: generateEuclideanPattern(16, 8),
+    volume: 0.7,
   },
 ];
 
@@ -71,6 +74,15 @@ export const useSequencerStore = create<SequencerStore>()((set, get) => ({
           pattern: generateEuclideanPattern(clampedSteps, clampedPulses),
         };
       }),
+    })),
+
+  setVolume: (trackId, volume) =>
+    set((state) => ({
+      tracks: state.tracks.map((track) =>
+        track.id === trackId
+          ? { ...track, volume: Math.max(0, Math.min(volume, 1)) }
+          : track
+      ),
     })),
 
   setBpm: (bpm) => set({ bpm: Math.max(40, Math.min(bpm, 300)) }),
