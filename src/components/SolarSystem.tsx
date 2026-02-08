@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import { View, PanResponder, useWindowDimensions } from "react-native";
 import Svg, { Text as SvgText } from "react-native-svg";
 import TrackCircle from "./TrackCircle";
-import CodeDisplay from "./CodeDisplay";
 import { TRACK_COLORS } from "../constants/colors";
 import { useSequencerStore } from "../store/useSequencerStore";
 
@@ -14,13 +13,10 @@ export default function SolarSystem() {
   const currentStep = useSequencerStore((s) => s.currentStep);
   const isPlaying = useSequencerStore((s) => s.isPlaying);
   const setPulses = useSequencerStore((s) => s.setPulses);
-  const strudelFormat = useSequencerStore((s) => s.strudelFormat);
-  const getStrudelCode = useSequencerStore((s) => s.getStrudelCode);
 
   const size = Math.min(width, height) * 0.85;
   const center = size / 2;
   const radii = RADII_RATIOS.map((r) => size * r);
-  const codeSize = radii[2] * 2 - 20;
 
   const panRef = useRef({ trackId: "", lastSteps: 0 });
 
@@ -109,7 +105,6 @@ export default function SolarSystem() {
           })}
         </Svg>
       </View>
-      <CodeDisplay code={getStrudelCode()} size={codeSize} />
     </View>
   );
 }

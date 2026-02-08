@@ -5,15 +5,13 @@ import { Copy, Check } from "lucide-react-native";
 import { UI } from "../constants/colors";
 import { useSequencerStore } from "../store/useSequencerStore";
 
-interface CodeDisplayProps {
-  code: string;
-  size: number;
-}
-
-export default function CodeDisplay({ code, size }: CodeDisplayProps) {
+export default function CodeDisplay() {
   const [copied, setCopied] = useState(false);
+  const getStrudelCode = useSequencerStore((s) => s.getStrudelCode);
   const strudelFormat = useSequencerStore((s) => s.strudelFormat);
   const toggleStrudelFormat = useSequencerStore((s) => s.toggleStrudelFormat);
+
+  const code = getStrudelCode();
 
   const handleCopy = useCallback(async () => {
     await Clipboard.setStringAsync(code);
@@ -22,40 +20,42 @@ export default function CodeDisplay({ code, size }: CodeDisplayProps) {
   }, [code]);
 
   return (
-    <View
-      style={{
-        width: size,
-        height: size,
-        borderRadius: size / 2,
-        backgroundColor: "rgba(24, 24, 27, 0.9)",
-      }}
-      className="items-center justify-center p-3 absolute"
-    >
+    <View className="w-full px-4 py-3 border-t border-zinc-800 bg-zinc-900/95">
       <Pressable onPress={toggleStrudelFormat}>
         <Text
-          style={{ color: UI.codeText, fontFamily: "monospace", fontSize: 9 }}
-          className="text-center leading-tight"
-          numberOfLines={6}
+          style={{ color: UI.codeText, fontFamily: "monospace", fontSize: 11 }}
+          className="leading-snug"
+          numberOfLines={4}
         >
           {code}
         </Text>
-        <Text
-          style={{ fontFamily: "monospace", fontSize: 7 }}
-          className="text-zinc-500 text-center mt-1"
+      </Pressable>
+      <View className="flex-row items-center justify-between mt-2">
+        <Pressable onPress={toggleStrudelFormat}>
+          <Text
+            style={{ fontFamily: "monospace", fontSize: 9 }}
+            className="text-zinc-500"
+          >
+            {strudelFormat === "euclidean" ? "E(k,n)" : "struct"}
+          </Text>
+        </Pressable>
+        <Pressable
+          onPress={handleCopy}
+          className="flex-row items-center gap-1.5 p-1.5 rounded bg-zinc-800 active:bg-zinc-700"
         >
-          {strudelFormat === "euclidean" ? "E(k,n)" : "struct"}
-        </Text>
-      </Pressable>
-      <Pressable
-        onPress={handleCopy}
-        className="mt-1 p-1.5 rounded-full bg-zinc-800 active:bg-zinc-700"
-      >
-        {copied ? (
-          <Check size={12} color={UI.codeText} />
-        ) : (
-          <Copy size={12} color={UI.chrome} />
-        )}
-      </Pressable>
+          {copied ? (
+            <Check size={12} color={UI.codeText} />
+          ) : (
+            <Copy size={12} color={UI.chrome} />
+          )}
+          <Text
+            style={{ fontFamily: "monospace", fontSize: 9 }}
+            className="text-zinc-500"
+          >
+            {copied ? "copied" : "copy"}
+          </Text>
+        </Pressable>
+      </View>
     </View>
   );
 }

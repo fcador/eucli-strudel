@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import SolarSystem from "./src/components/SolarSystem";
 import VolumeSliders from "./src/components/VolumeSliders";
 import PlayControls from "./src/components/PlayControls";
+import CodeDisplay from "./src/components/CodeDisplay";
 import { useAudioEngine } from "./src/hooks/useAudioEngine";
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         <VolumeSliders />
         <PlayControls />
       </View>
+      <CodeDisplay />
     </SafeAreaView>
   );
 }
