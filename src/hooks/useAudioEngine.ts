@@ -15,6 +15,11 @@ export function useAudioEngine() {
 
   useEffect(() => {
     const loadSounds = async () => {
+      await Audio.setAudioModeAsync({
+        shouldDuckAndroid: false,
+        staysActiveInBackground: false,
+        playsInSilentModeIOS: true,
+      });
       for (const track of tracks) {
         const { sound } = await Audio.Sound.createAsync(track.asset);
         await sound.setVolumeAsync(track.volume);
