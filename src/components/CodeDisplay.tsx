@@ -25,7 +25,7 @@ export default function CodeDisplay() {
         <Text
           style={{ color: UI.codeText, fontFamily: "monospace", fontSize: 11 }}
           className="leading-snug"
-          numberOfLines={4}
+          numberOfLines={5}
         >
           {code}
         </Text>

@@ -11,6 +11,7 @@ const DEFAULT_TRACKS: Track[] = [
     asset: require("../../assets/sounds/kick.wav"),
     steps: 16,
     pulses: 4,
+    rotation: 0,
     pattern: generateEuclideanPattern(16, 4),
     volume: 0.7,
   },
@@ -21,6 +22,7 @@ const DEFAULT_TRACKS: Track[] = [
     asset: require("../../assets/sounds/snare.wav"),
     steps: 16,
     pulses: 2,
+    rotation: 0,
     pattern: generateEuclideanPattern(16, 2),
     volume: 0.7,
   },
@@ -31,6 +33,7 @@ const DEFAULT_TRACKS: Track[] = [
     asset: require("../../assets/sounds/hihat.wav"),
     steps: 16,
     pulses: 8,
+    rotation: 0,
     pattern: generateEuclideanPattern(16, 8),
     volume: 0.7,
   },
@@ -68,12 +71,25 @@ export const useSequencerStore = create<SequencerStore>()((set, get) => ({
         if (track.id !== trackId) return track;
         const clampedSteps = Math.max(1, Math.min(steps, 32));
         const clampedPulses = Math.min(track.pulses, clampedSteps);
+        const clampedRotation =
+          track.rotation >= clampedSteps ? 0 : track.rotation;
         return {
           ...track,
           steps: clampedSteps,
           pulses: clampedPulses,
+          rotation: clampedRotation,
           pattern: generateEuclideanPattern(clampedSteps, clampedPulses),
         };
+      }),
+    })),
+
+  setRotation: (trackId, rotation) =>
+    set((state) => ({
+      tracks: state.tracks.map((track) => {
+        if (track.id !== trackId) return track;
+        const clamped =
+          ((rotation % track.steps) + track.steps) % track.steps;
+        return { ...track, rotation: clamped };
       }),
     })),
 

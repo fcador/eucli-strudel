@@ -32,3 +32,9 @@ export function generateEuclideanPattern(
 
   return groups.flat();
 }
+
+export function rotatePattern(pattern: Pattern, rotation: number): Pattern {
+  if (rotation === 0 || pattern.length === 0) return pattern;
+  const r = ((rotation % pattern.length) + pattern.length) % pattern.length;
+  return [...pattern.slice(r), ...pattern.slice(0, r)];
+}

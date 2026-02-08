@@ -4,6 +4,7 @@ import { UI } from "../constants/colors";
 
 const HELP_ITEMS = [
   "Swipe up/down on a circle to change pulses",
+  "Swipe left/right on a circle to rotate the pattern",
   "Tap the code panel to switch notation format",
   "Tap copy to copy the Strudel code",
   "Use sliders to adjust volume per track",
