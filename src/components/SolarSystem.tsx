@@ -14,6 +14,7 @@ export default function SolarSystem() {
   const currentStep = useSequencerStore((s) => s.currentStep);
   const isPlaying = useSequencerStore((s) => s.isPlaying);
   const setPulses = useSequencerStore((s) => s.setPulses);
+  const strudelFormat = useSequencerStore((s) => s.strudelFormat);
   const getStrudelCode = useSequencerStore((s) => s.getStrudelCode);
 
   const size = Math.min(width, height) * 0.85;

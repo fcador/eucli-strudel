@@ -1,5 +1,7 @@
 export type Pattern = number[];
 
+export type StrudelFormat = "euclidean" | "struct";
+
 export interface Track {
   id: string;
   label: string;
@@ -16,6 +18,7 @@ export interface SequencerState {
   isPlaying: boolean;
   currentStep: number;
   bpm: number;
+  strudelFormat: StrudelFormat;
 }
 
 export interface SequencerActions {
@@ -24,6 +27,7 @@ export interface SequencerActions {
   setSteps: (trackId: string, steps: number) => void;
   setVolume: (trackId: string, volume: number) => void;
   setBpm: (bpm: number) => void;
+  toggleStrudelFormat: () => void;
   tick: () => void;
   getStrudelCode: () => string;
 }
