@@ -18,7 +18,7 @@ function TrackVolumeSlider({ trackId }: { trackId: string }) {
   const colors = TRACK_COLORS[trackId];
 
   return (
-    <View className="flex-row items-center gap-2">
+    <View className="flex-row items-center gap-4">
       <Text
         style={{ fontFamily: "monospace", color: colors.active, width: 44 }}
         className="text-[11px] text-right"
@@ -50,7 +50,7 @@ export default function VolumeSliders() {
   const tracks = useSequencerStore((s) => s.tracks);
 
   return (
-    <View className="w-full px-8 mt-2">
+    <View className="w-full px-8 mt-2 gap-2">
       {tracks.map((track) => (
         <TrackVolumeSlider key={track.id} trackId={track.id} />
       ))}

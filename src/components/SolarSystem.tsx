@@ -6,7 +6,7 @@ import CodeDisplay from "./CodeDisplay";
 import { TRACK_COLORS } from "../constants/colors";
 import { useSequencerStore } from "../store/useSequencerStore";
 
-const RADII_RATIOS = [0.38, 0.28, 0.18];
+const RADII_RATIOS = [0.42, 0.29, 0.16];
 
 export default function SolarSystem() {
   const { width, height } = useWindowDimensions();
@@ -70,7 +70,7 @@ export default function SolarSystem() {
 
   return (
     <View
-      className="items-center justify-center"
+      className="items-center justify-center mb-16"
       style={{ width: size, height: size }}
     >
       <View {...panResponder.panHandlers}>

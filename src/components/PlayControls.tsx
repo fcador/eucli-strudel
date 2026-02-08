@@ -20,7 +20,7 @@ export default function PlayControls() {
   }, [bpm, setBpm]);
 
   return (
-    <View className="flex-row items-center justify-center gap-6 mt-6">
+    <View className="flex-row items-center justify-center gap-6 mt-16">
       <Pressable
         onPress={togglePlay}
         className="w-14 h-14 rounded-full bg-zinc-800 items-center justify-center active:bg-zinc-700 border border-zinc-700"
