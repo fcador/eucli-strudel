@@ -41,6 +41,7 @@ export const useSequencerStore = create<SequencerStore>()((set, get) => ({
   isPlaying: false,
   currentStep: 0,
   bpm: 120,
+  strudelFormat: "euclidean",
 
   togglePlay: () =>
     set((state) => ({
@@ -87,11 +88,17 @@ export const useSequencerStore = create<SequencerStore>()((set, get) => ({
 
   setBpm: (bpm) => set({ bpm: Math.max(40, Math.min(bpm, 300)) }),
 
+  toggleStrudelFormat: () =>
+    set((state) => ({
+      strudelFormat:
+        state.strudelFormat === "euclidean" ? "struct" : "euclidean",
+    })),
+
   tick: () =>
     set((state) => {
       const maxSteps = Math.max(...state.tracks.map((t) => t.steps));
       return { currentStep: (state.currentStep + 1) % maxSteps };
     }),
 
-  getStrudelCode: () => tracksToStrudel(get().tracks),
+  getStrudelCode: () => tracksToStrudel(get().tracks, get().strudelFormat),
 }));
