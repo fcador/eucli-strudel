@@ -91,6 +91,8 @@ Then press `i` for iOS simulator, `a` for Android emulator, or `w` for web.
 
 ## License
 
-MIT License - Copyright (c) Fabien Cador
+PolyForm Noncommercial License - Copyright (c) Fabien Cador
 
-You are free to use, modify, and distribute this project, provided that credit is given to the original author. See [LICENSE](LICENSE) for details.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to use,
+copy, modify, and distribute the Software, subject to conditions. See [LICENSE](LICENSE) for details.
