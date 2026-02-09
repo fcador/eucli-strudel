@@ -1,21 +1,52 @@
-MIT License
+PolyForm Noncommercial License 1.0.0
 
 Copyright (c) 2025 Fabien Cador
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+of this software and associated documentation files (the "Software"), to use,
+copy, modify, and distribute the Software, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. Noncommercial Use Only
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+   You may not use the Software for any commercial purpose. A "commercial
+   purpose" is any use intended to generate revenue, financial gain, or
+   commercial advantage, whether direct or indirect. This includes, but is
+   not limited to, selling the Software, offering paid services that rely on
+   the Software, or incorporating the Software into a product or service sold
+   or offered for a fee.
+
+2. Redistribution
+
+   You may redistribute copies of the Software, in source or binary form,
+   provided that:
+
+   (a) You include this license and the above copyright notice in all copies
+       or substantial portions of the Software.
+
+   (b) You do not grant rights to use the Software for commercial purposes.
+
+   (c) You clearly indicate any modifications you have made to the Software.
+
+3. Modifications
+
+   You may modify the Software and distribute modified versions, subject to
+   the same conditions as above. Modified versions must carry prominent
+   notices stating that you changed the Software.
+
+4. No Sublicensing
+
+   You may not sublicense the Software under different terms. Any
+   redistribution must be under this same license.
+
+5. No Warranty
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+   DEALINGS IN THE SOFTWARE.
+
+For the full PolyForm Noncommercial License 1.0.0, see:
+https://polyformproject.org/licenses/noncommercial/1.0.0
