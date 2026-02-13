@@ -1,7 +1,6 @@
 import { create } from "zustand";
+import { generateEuclideanPattern, tracksToStrudel } from "apx-ds/utils";
 import { SequencerStore, Track } from "../types/sequencer";
-import { generateEuclideanPattern } from "../utils/euclidean";
-import { tracksToStrudel } from "../utils/strudel";
 
 const DEFAULT_TRACKS: Track[] = [
   {

@@ -1,17 +1,13 @@
-export type Pattern = number[];
+export type {
+  Pattern,
+  StrudelFormat,
+  Track as BaseTrack,
+} from "apx-ds";
 
-export type StrudelFormat = "euclidean" | "struct";
+import type { Track as BaseTrack, Pattern, StrudelFormat } from "apx-ds";
 
-export interface Track {
-  id: string;
-  label: string;
-  sound: string;
+export interface Track extends BaseTrack {
   asset: ReturnType<typeof require>;
-  steps: number;
-  pulses: number;
-  rotation: number;
-  pattern: Pattern;
-  volume: number;
 }
 
 export interface SequencerState {
