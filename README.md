@@ -44,7 +44,8 @@ stack(
 - **Expo SDK 54** with new architecture enabled
 - **React Native** (iOS, Android, Web)
 - **TypeScript** (strict mode)
-- **NativeWind v4** (Tailwind CSS for React Native)
+- **[apx-ds](https://github.com/fcador/apx-ds)** — shared design system providing color tokens, base types (`Track`, `Pattern`, `StrudelFormat`), utilities (Bjorklund algorithm, Strudel code generation), and a Tailwind preset
+- **NativeWind v4** (Tailwind CSS for React Native, using the apx-ds preset)
 - **Zustand v5** for state management
 - **expo-av** for audio playback
 - **react-native-svg** for the circular sequencer UI
@@ -55,12 +56,12 @@ stack(
 ```
 App.tsx                          # Root component
 src/
-  types/sequencer.ts             # Track, Pattern, SequencerState types
-  utils/euclidean.ts             # Bjorklund algorithm + pattern rotation
-  utils/strudel.ts               # Tracks to Strudel code conversion
-  store/useSequencerStore.ts     # Zustand store (state + actions)
+  types/sequencer.ts             # App-specific Track (extends apx-ds BaseTrack), SequencerState
+  utils/euclidean.ts             # Re-exports from apx-ds
+  utils/strudel.ts               # Re-exports from apx-ds
+  store/useSequencerStore.ts     # Zustand store (state + actions, uses apx-ds utils)
   hooks/useAudioEngine.ts        # Audio playback engine
-  constants/colors.ts            # Track colors and UI palette
+  constants/colors.ts            # Re-exports TRACK_COLORS and UI_COLORS from apx-ds/tokens
   components/
     SolarSystem.tsx              # Orbital ring display + gesture handling
     TrackCircle.tsx              # Single track ring (SVG)
@@ -70,6 +71,8 @@ src/
     HelpOverlay.tsx              # Help modal
 assets/sounds/                   # TR-808 samples (kick, snare, hihat)
 ```
+
+The core logic (Bjorklund algorithm, Strudel notation, color tokens, base types) lives in the **apx-ds** design system package. This app extends it with audio playback, gesture interaction, and the sequencer UI.
 
 ## Getting Started
 
