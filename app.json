@@ -26,6 +26,20 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "plugins": [
+      [
+        "react-native-audio-api",
+        {
+          "iosBackgroundMode": true,
+          "androidPermissions": [
+            "android.permission.FOREGROUND_SERVICE",
+            "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"
+          ],
+          "androidForegroundService": true,
+          "androidFSTypes": ["mediaPlayback"]
+        }
+      ]
+    ],
     "extra": {
       "eas": {
         "projectId": "b6b1960a-2041-4406-b438-a41ca0db0135"
