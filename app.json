@@ -13,7 +13,8 @@
       "backgroundColor": "#000000"
     },
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "com.euclistrudel.app"
     },
     "android": {
       "package": "com.euclistrudel.app",
@@ -21,7 +22,11 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#000000"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "permissions": [
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -36,7 +41,9 @@
             "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"
           ],
           "androidForegroundService": true,
-          "androidFSTypes": ["mediaPlayback"]
+          "androidFSTypes": [
+            "mediaPlayback"
+          ]
         }
       ]
     ],
