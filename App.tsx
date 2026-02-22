@@ -1,7 +1,7 @@
 import "./global.css";
 import { View } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import * as Clipboard from "expo-clipboard";
 import {
   SolarSystem,
@@ -39,38 +39,40 @@ export default function App() {
   const getStrudelCode = useSequencerStore((s) => s.getStrudelCode);
 
   return (
-    <SafeAreaView className="flex-1 bg-[#0a0a0a]">
-      <StatusBar style="light" />
-      <View className="flex-1 items-center justify-center">
-        <HelpOverlay
-          title="Eucli Strudel"
-          description="Euclidean rhythm sequencer generating Strudel.cc code."
-          items={HELP_ITEMS}
+    <SafeAreaProvider>
+      <SafeAreaView className="flex-1 bg-[#0a0a0a]">
+        <StatusBar style="light" />
+        <View className="flex-1 items-center justify-center">
+          <HelpOverlay
+            title="Eucli Strudel"
+            description="Euclidean rhythm sequencer generating Strudel.cc code."
+            items={HELP_ITEMS}
+          />
+          <SolarSystem
+            tracks={tracks}
+            currentStep={currentStep}
+            isPlaying={isPlaying}
+            onPulsesChange={setPulses}
+            onRotationChange={setRotation}
+          />
+          <VolumeSliders
+            tracks={tracks}
+            onVolumeChange={setVolume}
+          />
+          <PlayControls
+            isPlaying={isPlaying}
+            bpm={bpm}
+            onTogglePlay={togglePlay}
+            onBpmChange={setBpm}
+          />
+        </View>
+        <CodeDisplay
+          code={getStrudelCode()}
+          formatLabel={strudelFormat === "euclidean" ? "E(k,n)" : "struct"}
+          onToggleFormat={toggleStrudelFormat}
+          onCopy={(code) => Clipboard.setStringAsync(code)}
         />
-        <SolarSystem
-          tracks={tracks}
-          currentStep={currentStep}
-          isPlaying={isPlaying}
-          onPulsesChange={setPulses}
-          onRotationChange={setRotation}
-        />
-        <VolumeSliders
-          tracks={tracks}
-          onVolumeChange={setVolume}
-        />
-        <PlayControls
-          isPlaying={isPlaying}
-          bpm={bpm}
-          onTogglePlay={togglePlay}
-          onBpmChange={setBpm}
-        />
-      </View>
-      <CodeDisplay
-        code={getStrudelCode()}
-        formatLabel={strudelFormat === "euclidean" ? "E(k,n)" : "struct"}
-        onToggleFormat={toggleStrudelFormat}
-        onCopy={(code) => Clipboard.setStringAsync(code)}
-      />
-    </SafeAreaView>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
