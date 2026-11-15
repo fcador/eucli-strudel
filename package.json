@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@babel/runtime": "^7.28.6",
-    "@types/jest": "^29.5.14",
+    "@types/jest": "^30.0.0",
     "@types/react": "~19.1.0",
     "babel-preset-expo": "^54.0.10",
     "jest-expo": "~54.0.17",
